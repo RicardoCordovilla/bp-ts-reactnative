@@ -1,45 +1,73 @@
 import { useNavigation } from "@react-navigation/native"
 import React, { useEffect, useState } from "react"
 import { SafeAreaView, ScrollView, Text, View } from "react-native"
-// import { ProductsList } from "../../types/types"
-import useGet from "../../utils/hooks/fetchHook"
+import { FieldProps, Product } from "../../types/types"
 import ProductsContainer from "../../components/productscontainer/ProductsContainer"
-
-interface Product {
-    id: number
-    name: string
-    desription: string
-    logo: string
-    date_release: string
-    date_revision: string
-}
-
-type ProductsList = Product[]
-
+import { useGetProducts } from "../../utils/hooks/useFetch"
+import styles from "./myproducts.styles"
+import InputTextField from "../../components/fields/inputfield/InputTextField"
+import ButtonAction from "../../components/buttons/ButtonAction"
 
 
 const MyProductsPage: React.FC = () => {
+    const navigate = useNavigation()
+    const { data, fetchData } = useGetProducts()
 
-    const [products, setProducts] = useState<ProductsList>([])
-    const { data, loading, error, setFetch } = useGet()
+    const [products, setProducts] = useState<Product[]>([])
+    const [filterdProducts, setFilteredProducts] = useState<Product[]>([])
 
     useEffect(() => {
-        if (data) {
-            // console.log(data)
-            setProducts(data)
-        }
+        fetchData()
     }, [])
 
+    useEffect(() => {
+        if (data && data.length > 0) {
+            setProducts(data)
+            setFilteredProducts(data)
+        }
+    }, [data])
 
-    const navigate = useNavigation()
+
+    const handleSearch = (text: string) => {
+        const filtered = products.filter((product) => {
+            return product.name.toLowerCase().includes(text.toLowerCase())
+        })
+        setFilteredProducts(filtered)
+    }
+
+    const addProduct = () => {
+        navigate.navigate('edit')
+    }
+
+    const searchField: FieldProps = {
+        label: 'Search',
+        placeholder: 'Search...',
+        onChange: handleSearch,
+        validation: 'text',
+        disabled: false,
+        value: ''
+    }
+
+
     return (
-        <SafeAreaView>
-            <View>
-                <ProductsContainer
-                    items={products}
+        <SafeAreaView style={styles.container}>
+            <View >
+                <InputTextField
+                    label={searchField.label}
+                    placeholder={searchField.placeholder}
+                    validation={searchField.validation}
+                    disabled={searchField.disabled}
+                    value={searchField.value}
                 />
+                <View>
+                    {
+                        filterdProducts.length > 0 ?
+                            <ProductsContainer items={filterdProducts} />
+                            : <Text>No products found</Text>
+                    }
+                </View>
             </View>
-
+            <ButtonAction title='Agregar' severity='primary' action={addProduct} />
         </SafeAreaView>
     )
 }

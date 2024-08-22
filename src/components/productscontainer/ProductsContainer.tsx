@@ -1,30 +1,35 @@
 import React from 'react'
-import { Product } from '../../types/types'
-import { ScrollView, View } from 'react-native'
+import { Product, ProductsList } from '../../types/types'
+import { ScrollView, View, Text } from 'react-native'
 import RegisterRow from '../registerrow/RegisterRow'
+import styles from './productscontainer.styles'
+import RowProduct from '../skeletons/RowProduct'
 
-// interface Product {
-//     id: string;
-//     name: string;
-//     // Add other product properties as needed
-// }
-
-interface ProductsContainerProps {
-    items: ProductsList;
+interface MyProductsPageProps {
+    items: Product[]
 }
 
-type ProductsList = Product[];
-const ProductsContainer: React.FC<ProductsContainerProps> = ({ items }) => {
+const ProductsContainer: React.FC<MyProductsPageProps> = ({ items }) => {
     return (
-        <ScrollView >
-            {items.map((item) => {
-                return (
-                    <View key={item.id}>
-                        <RegisterRow product={item} />
-                    </View>
-                )
+        <ScrollView style={styles.productsContainer_container}>
+            {
+                items.length > 0 ? items.map((item: Product, index: number) => {
+                    return (
+                        <View key={item.id} >
+                            {
+                                items.length > 1 &&
+                                <RowProduct />                                                            }
+                            <RegisterRow item={item} />
+                            {
+                                index < items.length - 1 &&
+                                <View style={{ height: 1, backgroundColor: '#ccc' }} />
+                            }
+                        </View>
+                    )
+                }) : <View >
+                    <Text >No products found</Text>
+                </View>
             }
-            )}
         </ScrollView>
     )
 }
