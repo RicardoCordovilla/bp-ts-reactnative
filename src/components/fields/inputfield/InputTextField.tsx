@@ -33,7 +33,6 @@ const InputTextField: React.FC<InputFieldProps> = ({ label, placeholder, validat
                 setError(null)
             }
         }
-        // onChange(text)
         setText(text)
     }
 

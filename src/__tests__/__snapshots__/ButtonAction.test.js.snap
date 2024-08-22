@@ -1,0 +1,76 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ButtonAction renders correctly 1`] = `
+<View
+  accessibilityState={
+    {
+      "busy": undefined,
+      "checked": undefined,
+      "disabled": undefined,
+      "expanded": undefined,
+      "selected": undefined,
+    }
+  }
+  accessibilityValue={
+    {
+      "max": undefined,
+      "min": undefined,
+      "now": undefined,
+      "text": undefined,
+    }
+  }
+  accessible={true}
+  collapsable={false}
+  focusable={true}
+  onClick={[Function]}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  style={
+    {
+      "opacity": 1,
+    }
+  }
+>
+  <View
+    style={
+      [
+        {
+          "borderColor": "transparent",
+          "borderRadius": 5,
+          "borderWidth": 1,
+          "marginHorizontal": 10,
+          "marginTop": 20,
+          "paddingVertical": 20,
+          "textAlign": "center",
+        },
+        {
+          "backgroundColor": "#ebee40",
+          "borderColor": "#000",
+        },
+      ]
+    }
+  >
+    <Text
+      style={
+        [
+          {
+            "color": "#346",
+            "fontSize": 20,
+            "fontWeight": "500",
+            "textAlign": "center",
+          },
+          {
+            "color": "#000",
+          },
+        ]
+      }
+    >
+      Test Button
+    </Text>
+  </View>
+</View>
+`;

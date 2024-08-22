@@ -6,7 +6,23 @@
     "start": "expo start",
     "android": "expo start --android",
     "ios": "expo start --ios",
-    "web": "expo start --web"
+    "web": "expo start --web",
+    "test": "jest"
+  },
+  "jest": {
+    "preset": "jest-expo",
+    "transformIgnorePatterns": [
+      "node_modules/(?!(jest-)?react-native|@react-native|@react-navigation|@react-native-community|expo(nent)?|@expo(nent)?/.*|react-clone-referenced-element|@unimodules/.*|unimodules|sentry-expo|native-base)"
+    ],
+    "collectCoverage": true,
+    "collectCoverageFrom": [
+      "**/*.{ts,tsx,js,jsx}",
+      "!**/coverage/**",
+      "!**/node_modules/**",
+      "!**/babel.config.js",
+      "!**/expo-env.d.ts",
+      "!**/.expo/**"
+    ]
   },
   "dependencies": {
     "@react-navigation/native": "^6.1.17",
@@ -15,8 +31,11 @@
     "expo": "~51.0.20",
     "expo-secure-store": "^13.0.2",
     "expo-status-bar": "~1.12.1",
+    "jest": "^29.4.0",
+    "jest-expo": "~51.0.4",
     "react": "18.2.0",
     "react-native": "0.74.3",
+    "react-test-renderer": "^18.2.0",
     "zustand": "^4.5.5"
   },
   "devDependencies": {

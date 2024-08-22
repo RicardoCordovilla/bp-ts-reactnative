@@ -6,7 +6,13 @@ import ProductPage from './src/screens/product/ProductPage';
 import EditPage from './src/screens/editproduct/EditPage';
 const Stack = createNativeStackNavigator();
 
-export const Navigation: React.FC = () => {
+type RootStackParamList = {
+    home: undefined;
+    product: undefined;
+    edit: undefined;
+};
+
+export const Navigation: React.FC<RootStackParamList> = () => {
     return (
         <NavigationContainer>
             <Stack.Navigator>
